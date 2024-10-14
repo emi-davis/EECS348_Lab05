@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define SIZE 5
 
+// prototypes
 void addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE], int result[SIZE][SIZE]);
 void multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE], int result[SIZE][SIZE]);
 void transposeMatrix(int m[SIZE][SIZE], int result[SIZE][SIZE]);
@@ -23,14 +24,18 @@ int main() {
     };
     int result[SIZE][SIZE];
 
+    printf("Added Matrices:\n");
     addMatrices(m1, m2, result);
     printMatrix(result);
-/*
+    printf("Multiplied Matrices:\n");
     multiplyMatrices(m1, m2, result);
     printMatrix(result);
-
+    printf("Transposed Matrix 1:\n");
     transposeMatrix(m1, result);
-    printMatrix(result);*/
+    printMatrix(result);
+    printf("Transposed Matrix 2:\n");
+    transposeMatrix(m2, result);
+    printMatrix(result);        
     return 0;
 }
 
@@ -42,6 +47,30 @@ void addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE], int result[SIZE][SIZE])
     }
 }
 
+// it is literally impossible to have incompatible dimensions with 1 define statement
+void multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            result[i][j]= 0; // init result matrix
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < SIZE; k++) {
+                result[i][j] += m1[i][k] * m2[k][j]; // multiply matrix of size i*k and k*j and set result equal to i*j (inside 'k' must match)
+            }
+        }
+    }
+}
+
+void transposeMatrix(int m[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            result[j][i] = m[i][j]; // flip rows and cols
+        }
+    }
+}
+
 void printMatrix(int m[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -49,4 +78,5 @@ void printMatrix(int m[SIZE][SIZE]) {
         }
         printf("\n");
     }
+    printf("\n");
 }
