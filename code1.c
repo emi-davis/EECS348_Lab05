@@ -64,6 +64,8 @@ void movingReport() {
 }
 
 void highToLow() {
+    printf("\nSales report (highest to lowest):\n\n");
+    printf("Month Sales\n");
     float sales_copy[12]; // copy sales
     for (int i = 0; i < 12; i++) {
         sales_copy[i] = sales[i];
